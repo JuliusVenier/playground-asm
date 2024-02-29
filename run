@@ -1,0 +1,8 @@
+#!/bin/bash
+NASMFLAGS="-f bin"
+
+nasm ./src/boot/boot.s $NASMFLAGS -o boot.bin
+nasm ./src/game/main_new.s $NASMFLAGS -o game.bin
+
+cat boot.bin game.bin > pong.bin
+qemu-system-i386 -drive format=raw,file=pong.bin
